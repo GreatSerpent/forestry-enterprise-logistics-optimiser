@@ -1,4 +1,4 @@
-# LPK Logistics Optimizer 🌲
+# Forestry Enterprise Logistics Optimizer 🌲
 
 A simple tool for small forestry businesses to find the most profitable sales routes. It calculates net profit by subtracting transport costs from the sales price.
 
