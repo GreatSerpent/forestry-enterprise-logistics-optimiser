@@ -21,8 +21,8 @@ def find_most_profit_buyer():
 
         # SQL-query to get buyer data
         query = """
-            SELECT buyer, price, distance, tariff
-            FROM buyers_data
+            SELECT buyer, price, tariff, distance, destination
+            FROM buyer_data
         """
         # extracting values from the database
         cursor.execute(query)
@@ -30,19 +30,21 @@ def find_most_profit_buyer():
         # initialization of variables
         best_price = 0 
         best_buyer = None
+        best_destination = None
 
         # basic cycle of finding maximum profit
-        for buyer, s, l, t in cursor.fetchall():
+        for buyer, s, t, l, destination in cursor.fetchall():
             current_profit = float(s) - (float(l) * float(t))
 
             # load the best price if the current price is greater than the previous one
             if current_profit > best_price:
                 best_price = current_profit
                 best_buyer = buyer
+                best_destination = destination
 
         cursor.close()
         conn.close()
-        return f"Recommended buyer: {best_buyer} | Expected net profit: {current_profit:.2f}"
+        return f"Рекомендованный покупатель: {best_buyer}, {best_destination} | Ожидаемая прибыль: {best_price:.2f}"
     
     except Exception as e:
         return f"Error: {e}"
